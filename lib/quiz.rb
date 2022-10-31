@@ -8,7 +8,7 @@ class Quiz
   end
 
   def accept_answer?(question, answer)
-    answer_correct = question.answer == question.answer
+    answer_correct = question.answer == question.variants[answer]
     if answer_correct
       @accepted += 1
       @scores += question.score
