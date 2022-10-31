@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <questions>
   <question>
-    <text>Сколько байт в килобайте?</text>
+    Сколько байт в килобайте?
     <answer>1024</answer>
     <score>5</score>
   </question>
 
   <question>
-    <text>В каком году Гагарин полетел в космос?</text>
+    В каком году Гагарин полетел в космос?
     <answer>1961</answer>
     <score>3</score>
   </question>
 
   <question>
-    <text>Сколько дней в високосном году?</text>
+    Сколько дней в високосном году?
     <answer>366</answer>
     <score>1</score>
   </question>
 
   <question>
-    <text>Сколько лап у паука?</text>
+    Сколько лап у паука?
     <answer>8</answer>
     <score>2</score>
   </question>
 
   <question>
-    <text>В каком году открыли Америку?</text>
+    В каком году открыли Америку?
     <answer>1492</answer>
     <score>3</score>
   </question>
 
   <question>
-    <text>Сколько естественных спутников у Юпитера?</text>
+    Сколько естественных спутников у Юпитера?
     <answer>80</answer>
     <score>6</score>
   </question>
 
   <question>
-    <text>Сколько континентов на Земле?</text>
+    Сколько континентов на Земле?
     <answer>6</answer>
     <score>4</score>
   </question>

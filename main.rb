@@ -1,35 +1,39 @@
 require "rexml/document"
 require_relative "lib/question"
-
-N_QUESTIONS = 5
+require_relative "lib/quiz"
 
 file = File.open(File.join("data", "questions.xml"))
 q_doc = REXML::Document.new(file)
 file.close
 
-questions = []
-q_doc.root.elements.each("question") do |question|
-  questions << Question.new(
-    question.text("text"),
-    question.text("answer"),
-    question.text("score")
-  )
-end
+questions =
+  q_doc.root.elements.collect("question") do |question|
+    Question.new(
+      question.text.strip,
+      question.text("answer"),
+      question.text("score")
+    )
+  end
 
-accepted = 0
-scores = 0
-questions.sample(N_QUESTIONS).each_with_index do |question, index|
-  puts "#{index + 1}. #{question}"
+quiz = Quiz.new(questions, 5, 5)
+quiz.questions.each.with_index(1) do |question, index|
+  puts "#{index}. #{question}"
+  start_time = Time.now
   answer = $stdin.gets.chomp
+  end_time = Time.now
 
-  if answer == question.answer
-    accepted += 1
-    scores += question.scores
+  if end_time - start_time > quiz.answer_time
+    puts "Время ответа было слишком долгое. Викторина завершена."
+    break
+  end
+
+  if quiz.accept_answer?(question, answer)
     puts "Верный ответ!"
   else
     puts "Неправильно. Правильный ответ: #{question.answer}"
   end
 end
 
-puts "Правильных ответов: #{accepted} из #{QUESTIONS_QUANTITY}"
-puts "Вы набрали #{scores} баллов"
+puts
+puts "Правильных ответов: #{quiz.accepted} из #{quiz.questions.size}"
+puts "Вы набрали #{quiz.scores} баллов"
