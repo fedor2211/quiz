@@ -6,10 +6,15 @@ class Question
     @score = params[:score].to_i
     @text = params[:text]
     @answer = params[:answer]
-    @variants = params[:variants].shuffle
+    @variants = params[:variants]
   end
 
   def to_s
-    "#{@text} (#{@score} баллов, #{@answer_time} секунд на ответ)"
+    <<~QUESTION
+      #{@text} (#{@score} баллов, #{@answer_time} секунд на ответ)
+      #{@variants.map
+                 .with_index(1) { |variant, index| "#{index}. #{variant}" }
+                 .join("\n")}
+    QUESTION
   end
 end

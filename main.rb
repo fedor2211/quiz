@@ -14,19 +14,17 @@ questions =
       end
     Question.new(
       answer: variants.find { |variant| variant["right"] == "true" }.text,
-      variants: variants.map(&:text),
+      variants: variants.map(&:text).shuffle,
       text: question.text("text"),
       score: question["score"],
       answer_time: question["seconds"]
     )
   end
 
-quiz = Quiz.new(questions, 5)
-quiz.questions.each.with_index(1) do |question, index|
-  puts "#{index}. #{question}"
-  question.variants.each.with_index(1) do |variant, index|
-    puts "  #{index}) #{variant}"
-  end
+quiz = Quiz.new(questions.shuffle)
+until quiz.over?
+  question = quiz.current_question
+  puts question
   start_time = Time.now
   answer = $stdin.gets
   end_time = Time.now
@@ -36,7 +34,7 @@ quiz.questions.each.with_index(1) do |question, index|
     break
   end
 
-  if quiz.accept_answer?(question, answer.to_i - 1)
+  if quiz.accept_answer?(answer.to_i - 1)
     puts "Верный ответ!"
   else
     puts %(Неправильно. Правильный ответ: "#{question.answer}")
