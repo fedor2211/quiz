@@ -34,7 +34,7 @@ until quiz.over?
     break
   end
 
-  if quiz.accept_answer?(answer.to_i - 1)
+  if quiz.accept_answer!(answer.to_i - 1)
     puts "Верный ответ!"
   else
     puts %(Неправильно. Правильный ответ: "#{question.answer}")

@@ -12,7 +12,7 @@ class Quiz
     @questions[@question_index]
   end
 
-  def accept_answer?(answer)
+  def accept_answer!(answer)
     answer_correct = current_question.variants[answer] == current_question.answer
     if answer_correct
       @accepted += 1
